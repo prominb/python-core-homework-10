@@ -52,9 +52,11 @@ class Record:
             raise ValueError(f'Phone {phone} not found!')
 
     def find_phone(self, phone: str):  # пошуку об'єктів Phone - find_phone
-        for i in range(len(self.phones)):
-            if str(self.phones[i]) == phone:
-                return self.phones[i]
+        # for i in range(len(self.phones)):
+        #     if str(self.phones[i]) == phone:
+        #         return self.phones[i]
+        for item in filter(lambda i: i.__str__() == phone, self.phones):
+            return item
 
 
 class AddressBook(UserDict):
