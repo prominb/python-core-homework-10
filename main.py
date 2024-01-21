@@ -74,8 +74,11 @@ class AddressBook(UserDict):
     def find(self, name):  # Реалізовано метод find, який знаходить запис за ім'ям.
         return self.data.get(name)
 
-    def delete(self):  # Реалізовано метод delete, який видаляє запис за ім'ям.
-        pass
+    def delete(self, name):  # Реалізовано метод delete, який видаляє запис за ім'ям.
+        # pass
+        # print(name in self.data)
+        if name in self.data:
+            return f'Record with {self.data.pop(name)} was removed!'
 
 
 # Після реалізації ваш код має виконуватися наступним чином:
@@ -108,8 +111,8 @@ book.add_record(jane_record)
 # print(book)
 
 # Виведення всіх записів у книзі
-for name, record in book.data.items():
-    print(record)
+# for name, record in book.data.items():
+    # print(record)
 
 # Знаходження та редагування телефону для John
 john = book.find("John")
@@ -119,20 +122,26 @@ john.edit_phone("1234567890", "1112223333")
 # john.edit_phone("1234567890", "111222ww33")
 # john.edit_phone("1234567890", "11122233")
 
-print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
+# print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
 
 # Пошук конкретного телефону у записі John
 found_phone = john.find_phone("5555555555")
 # found_phone = john.find_phone("5555555512")
 # found_phone = john.find_phone("55555555")
-print(f"{john.name}: {found_phone}")  # Виведення: 5555555555
+# print(f"{john.name}: {found_phone}")  # Виведення: 5555555555
 
 # Видалення конкретного телефону у записі John
 delete_phone = john.remove_phone("5555555555")
-print(f"In Contact: {john.name} Phone number {delete_phone} was removed.")  # Видалення: 5555555555
+# print(f"In Contact: {john.name} - Phone number {delete_phone} was removed.")  # Видалення: 5555555555
 
 # john_record.add_phone("6666666666")
-print(john_record)
+# print(john_record)
 
-# # Видалення запису Jane
-# book.delete("Jane")
+# Видалення запису Jane
+book.delete("Jane")
+# print(book.delete("Jane"))
+# print(book.delete("Johnny"))
+
+# Виведення всіх записів у книзі
+# for name, record in book.data.items():
+    # print(record)
