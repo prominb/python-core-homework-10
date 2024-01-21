@@ -10,11 +10,13 @@ class Field:
 
 
 class Name(Field):
-    pass  # реалізація класу
+    def __init__(self, value):
+        super().__init__(value)
 
 
 class Phone(Field):  # Реалізовано валідацію номера телефону (має бути 10 цифр).
-    pass  # реалізація класу
+    def __init__(self, value):
+        super().__init__(value)
 
 
 class Record:
@@ -23,9 +25,12 @@ class Record:
         self.name = Name(name)  # Реалізовано зберігання об'єкта Name в окремому атрибуті.
         self.phones = []  # Реалізовано зберігання списку об'єктів Phone в окремому атрибуті.
 
+    def __str__(self):
+        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+
     # Реалізовано методи для:
-    def add_phone(self):  # додавання - add_phone
-        pass
+    def add_phone(self, phone: str):  # додавання - add_phone
+        self.phones.append(Phone(phone))
 
     def remove_phone(self):  # видалення - remove_phone
         pass
@@ -35,9 +40,6 @@ class Record:
 
     def find_phone(self):  # пошуку об'єктів Phone - find_phone
         pass
-
-    def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
 
 
 class AddressBook(UserDict):
@@ -61,9 +63,12 @@ book = AddressBook()
 
 # Створення запису для John
 john_record = Record("John")
-print(john_record)
-# john_record.add_phone("1234567890")
-# john_record.add_phone("5555555555")
+# print(john_record)
+john_record.add_phone("1234567890")
+# print(john_record)
+john_record.add_phone("5555555555")
+# print(john_record)
+# print(john_record.__str__())
 
 # # Додавання запису John до адресної книги
 # book.add_record(john_record)
