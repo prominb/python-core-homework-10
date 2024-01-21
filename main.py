@@ -16,7 +16,25 @@ class Name(Field):
 
 class Phone(Field):  # Реалізовано валідацію номера телефону (має бути 10 цифр).
     def __init__(self, value):
-        super().__init__(value)
+        # super().__init__(value)
+        self.value = self.check_phone(value)
+        # if len(value) != 10: # and not value.isdecimal():
+            # self.value = "AAAAQQQQQ"
+        # super().__init__(value)
+        # else:
+            # self.value = value
+
+    def check_phone(self, value):
+        # if len(value) != 10: # and not value.isdecimal():
+            # return "Not 10 characters"
+            # return CheckPhoneError
+        # elif not value.isdecimal():
+            # return "Not is Digit!"
+        if len(value) != 10 or not value.isdecimal():
+            # return CheckPhoneError
+            return "AAAQQQ"
+        else:
+            return value
 
 
 class Record:
@@ -67,7 +85,10 @@ john_record = Record("John")
 john_record.add_phone("1234567890")
 # print(john_record)
 john_record.add_phone("5555555555")
-# print(john_record)
+john_record.add_phone("5555555")
+print(john_record)
+john_record.add_phone("555qq55555")
+print(john_record)
 # print(john_record.__str__())
 
 # # Додавання запису John до адресної книги
