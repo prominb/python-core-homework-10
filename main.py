@@ -41,11 +41,21 @@ class Record:
     def remove_phone(self):  # видалення - remove_phone
         pass
 
-    def edit_phone(self):  # редагування - edit_phone
-        pass
+    def edit_phone(self, phone: str, new_phone: str):  # редагування - edit_phone
+        # pass
+        # print(phone, self.phones[0], phone in self.phones, new_phone)
+        # print(type(phone), type(str(self.phones[0])))
+        # print(phone == str(self.phones[0]))
+        # print(self.phones)
+        for i in range(len(self.phones)):
+            # print(str(self.phones[i]) == phone)
+            if str(self.phones[i]) == phone:
+                self.phones[i] = Phone(new_phone)
 
-    def find_phone(self):  # пошуку об'єктів Phone - find_phone
+    def find_phone(self, phone: str):  # пошуку об'єктів Phone - find_phone
         pass
+        # if phone in
+        # return phone
 
 
 class AddressBook(UserDict):
@@ -55,8 +65,8 @@ class AddressBook(UserDict):
     def add_record(self, record: Record):  # Додавання запису.
         self.data[record.name.value] = record
 
-    def find(self):  # Реалізовано метод find, який знаходить запис за ім'ям.
-        pass
+    def find(self, name):  # Реалізовано метод find, який знаходить запис за ім'ям.
+        return self.data.get(name)
 
     def delete(self):  # Реалізовано метод delete, який видаляє запис за ім'ям.
         pass
@@ -76,26 +86,31 @@ john_record.add_phone("5555555555")
 # john_record.add_phone("5555555")
 # print(john_record)
 # john_record.add_phone("555qq55555")
-print(john_record)
+# print(john_record)
 # print(john_record.__str__())
 
-# # Додавання запису John до адресної книги
-# book.add_record(john_record)
+# Додавання запису John до адресної книги
+book.add_record(john_record)
+# print(book)
 
-# # Створення та додавання нового запису для Jane
-# jane_record = Record("Jane")
-# jane_record.add_phone("9876543210")
-# book.add_record(jane_record)
+# Створення та додавання нового запису для Jane
+jane_record = Record("Jane")
+jane_record.add_phone("9876543210")
+# jane_record.add_phone("98765432as")
+book.add_record(jane_record)
+# print(book)
 
-# # Виведення всіх записів у книзі
-# for name, record in book.data.items():
-#     print(record)
+# Виведення всіх записів у книзі
+for name, record in book.data.items():
+    print(record)
 
-# # Знаходження та редагування телефону для John
-# john = book.find("John")
-# john.edit_phone("1234567890", "1112223333")
+# Знаходження та редагування телефону для John
+john = book.find("John")
+# john = book.find("Johnny")
+# print(john)
+john.edit_phone("1234567890", "1112223333")
 
-# print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
+print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
 
 # # Пошук конкретного телефону у записі John
 # found_phone = john.find_phone("5555555555")
