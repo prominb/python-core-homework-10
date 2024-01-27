@@ -26,14 +26,17 @@ class Phone(Field):
 
 
 class Birthday(Field):
-    ...
+    def __init__(self, value):
+        super().__init__(value)
 
 
 class Record:
-    '''Record: Додавання телефонів. Видалення телефонів. Редагування телефонів. Пошук телефону.'''
-    def __init__(self, name):
+    '''Record: Додавання телефонів. Видалення телефонів. Редагування телефонів. Пошук телефону.
+    Клас Record приймає ще один додатковий (опціональний) аргумент класу Birthday'''
+    def __init__(self, name, birthday = None):
         self.name = Name(name)  # Реалізовано зберігання об'єкта Name в окремому атрибуті.
         self.phones = []  # Реалізовано зберігання списку об'єктів Phone в окремому атрибуті.
+        self.birthday = Birthday(birthday)  # опціональний аргумент класу Birthday
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
@@ -59,7 +62,7 @@ class Record:
         for item in filter(lambda i: i.__str__() == phone, self.phones):
             return item
     
-    def days_to_birthday(self):
+    def days_to_birthday(self):  # повертає кількість днів до наступного дня народження.
         pass
 
 
@@ -76,3 +79,6 @@ class AddressBook(UserDict):
     def delete(self, name):  # Реалізовано метод delete, який видаляє запис за ім'ям.
         if name in self.data:
             return f'Record with {self.data.pop(name)} was removed!'
+    
+    def iterator(self):  # повертає генератор за записами AddressBook (за одну ітерацію повертає N записів).
+        pass
