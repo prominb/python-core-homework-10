@@ -25,6 +25,10 @@ class Phone(Field):
             raise ValueError("Phone must contain 10 digits only!")
 
 
+class Birthday(Field):
+    ...
+
+
 class Record:
     '''Record: Додавання телефонів. Видалення телефонів. Редагування телефонів. Пошук телефону.'''
     def __init__(self, name):
@@ -52,11 +56,11 @@ class Record:
             raise ValueError(f'Phone {phone} not found!')
 
     def find_phone(self, phone: str):  # пошуку об'єктів Phone - find_phone
-        # for i in range(len(self.phones)):
-        #     if str(self.phones[i]) == phone:
-        #         return self.phones[i]
         for item in filter(lambda i: i.__str__() == phone, self.phones):
             return item
+    
+    def days_to_birthday(self):
+        pass
 
 
 class AddressBook(UserDict):
